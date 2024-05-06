@@ -1425,7 +1425,7 @@ void RFWaitForReaderInit(void)
 	do
 	{
 		need_to_wait = false;
-		Log1(PCSC_LOG_DEBUG, "Checking needing to wait...")
+		Log1(PCSC_LOG_DEBUG, "Checking needing to wait...");
 		for (int i = 0; i < PCSCLITE_MAX_READERS_CONTEXTS; i++)
 		{
 			Log3(PCSC_LOG_DEBUG, "Check %i/%i", i, PCSCLITE_MAX_READERS_CONTEXTS);
