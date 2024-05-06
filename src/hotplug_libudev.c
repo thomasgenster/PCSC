@@ -474,10 +474,10 @@ static void HPAddDevice(struct udev_device *dev)
 				char buf[1024];
 				ssize_t len;
 				if ((len = readlink(dir->d_name, buf, sizeof(buf)-1)) != -1){
+					Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", dir->d_name, len);
 					buf[len] = '\0';
 				}
 				//printf("%s -> %s\n", dir->d_name, buf);
-				Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", dir->d_name, buf);
 			}
 		}
 		closedir(d);
