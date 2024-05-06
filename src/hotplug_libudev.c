@@ -470,8 +470,8 @@ static void HPAddDevice(struct udev_device *dev)
 	if (d) {
 		while ((dir = readdir(d)) != NULL) {
 			if (dir && contains("simHub1Key", dir->d_name) > -1){
-				char *sympath = "/dev/";
-				strcat(sympath, dir->d_name);
+				char sympath[128] = "/dev/";
+				strcat(&sympath, dir->d_name);
 				Log2(PCSC_LOG_INFO, "Reading directory: %s", sympath);
 				actualpath = realpath(sympath, NULL);
 				if(actualpath != NULL){
