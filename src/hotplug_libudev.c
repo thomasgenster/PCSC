@@ -48,6 +48,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <poll.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #include "debuglog.h"
 #include "parser.h"
@@ -465,8 +466,8 @@ static void HPAddDevice(struct udev_device *dev)
 				ssize_t len;
 				if ((len = readlink(dir->d_name, buf, sizeof(buf)-1)) != -1){
 					buf[len] = '\0';
-					printf("%s -> %s\n", dir->d_name, len);
 				}
+				printf("%s -> %s\n", dir->d_name, buf);
 			}
 		}
 		closedir(d);
