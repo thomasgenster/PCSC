@@ -476,6 +476,7 @@ static void HPAddDevice(struct udev_device *dev)
 				Log2(PCSC_LOG_INFO, "Reading directory: %s", sympath);
 				actualpath = realpath(sympath, NULL);
 				if(actualpath != NULL){
+					Log4(PCSC_LOG_INFO, "Checking %s: %s == %s", dir->d_name, devpath, actualpath);
 					if(devpath == actualpath){
 						Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", actualpath, dir->d_name);
 						asprintf(&fullname, "(SL:%s)", dir->d_name);
