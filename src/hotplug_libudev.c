@@ -463,10 +463,10 @@ static void HPAddDevice(struct udev_device *dev)
 	/* name from the Info.plist file */
 	// fullname = strdup(driver->readerName);
 
+	char *actualpath;
 	DIR *d;
 	struct dirent *dir;
 	d = opendir("/dev");
-	char *actualpath;
 	if (d) {
 		while ((dir = readdir(d)) != NULL) {
 			if (dir && contains("simHub1Key", dir->d_name) > -1){
@@ -475,7 +475,10 @@ static void HPAddDevice(struct udev_device *dev)
 				Log2(PCSC_LOG_INFO, "Reading directory: %s", sympath);
 				actualpath = realpath(sympath, NULL);
 				if(actualpath != NULL){
-					Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", dir->d_name, actualpath);
+					if(devpath == actualpath){
+						Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", actualpath, dir->d_name);
+						asprintf(&fullname, "%s (%s)", strdup(driver->readerName), dir->d_name);
+					}
 					free(actualpath);
 				}
 			}
@@ -483,7 +486,7 @@ static void HPAddDevice(struct udev_device *dev)
 		closedir(d);
 	}
 
-	asprintf(&fullname, "%s (%s)", strdup(driver->readerName), devpath);
+	//asprintf(&fullname, "%s (%s)", strdup(driver->readerName), devpath);
 
 	/* interface name from the device (if any) */
 	if (sInterfaceName)
