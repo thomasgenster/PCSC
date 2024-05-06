@@ -470,7 +470,7 @@ static void HPAddDevice(struct udev_device *dev)
 		Log1(PCSC_LOG_INFO, "Opening /dev");
 		while ((dir = readdir(d)) != NULL) {
 			Log2(PCSC_LOG_INFO, "Reading directory: %s", dir->d_name);
-			if (dir && contains("simHub1Key", dir->d_name)){
+			if (dir && contains("simHub1Key", dir->d_name) > -1){
 				char buf[1024];
 				ssize_t len;
 				if ((len = readlink(dir->d_name, buf, sizeof(buf)-1)) != -1){
