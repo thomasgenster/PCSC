@@ -428,6 +428,7 @@ static void * ContextThread(LPVOID newContext)
 
 				/* dump the readers state */
 				Log2(PCSC_LOG_DEBUG, "ReaderState: %i", sizeof(readerStates));
+				WRITE_BODY(readerStates);
 				ret = MessageSend(readerStates, sizeof(readerStates), filedes);
 			}
 			break;
