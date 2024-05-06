@@ -359,6 +359,13 @@ static void HPRemoveDevice(struct udev_device *dev)
 	}
 }
 
+ssize_t contains(const char * needle, const char *haystack)
+{
+	char *needle_in_haystack;
+	if(!needle || !haystack) return -1;
+	needle_in_haystack = strstr(haystack, needle);
+	return needle_in_haystack ? needle_in_haystack - haystack : -1;
+}
 
 static void HPAddDevice(struct udev_device *dev)
 {
@@ -462,8 +469,8 @@ static void HPAddDevice(struct udev_device *dev)
 	if (d) {
 		Log1(PCSC_LOG_INFO, "Opening /dev");
 		while ((dir = readdir(d)) != NULL) {
-			Log2(PCSC_LOG_INFO, "Reading %s", dir->d_name);
-			if (dir && !strcmp(dir->d_name, "simHub1Key")){
+			Log2(PCSC_LOG_INFO, "Reading directory: %s", dir->d_name);
+			if (dir && contains("simHub1Key", dir->d_name)){
 				char buf[1024];
 				ssize_t len;
 				if ((len = readlink(dir->d_name, buf, sizeof(buf)-1)) != -1){
