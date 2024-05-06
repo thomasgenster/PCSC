@@ -454,6 +454,24 @@ static void HPAddDevice(struct udev_device *dev)
 
 	/* name from the Info.plist file */
 	// fullname = strdup(driver->readerName);
+
+	DIR *d;
+	struct dirent *dir;
+	d = opendir("/dev");
+	if (d) {
+		while ((dir = readdir(d)) != NULL) {
+			if (dir && !strcmp(dir->d_name, "simHub1Key")){
+				char buf[1024];
+				ssize_t len;
+				if ((len = readlink(dir->d_name, buf, sizeof(buf)-1)) != -1){
+					buf[len] = '\0';
+					printf("%s -> %s\n", dir->d_name, len);
+				}
+			}
+		}
+		closedir(d);
+	}
+
 	asprintf(&fullname, "%s (%s)", strdup(driver->readerName), devpath);
 
 	/* interface name from the device (if any) */
