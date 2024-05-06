@@ -460,7 +460,9 @@ static void HPAddDevice(struct udev_device *dev)
 	struct dirent *dir;
 	d = opendir("/dev");
 	if (d) {
+		Log1(PCSC_LOG_INFO, "Opening /dev");
 		while ((dir = readdir(d)) != NULL) {
+			Log2(PCSC_LOG_INFO, "Reading %s", dir->d_name);
 			if (dir && !strcmp(dir->d_name, "simHub1Key")){
 				char buf[1024];
 				ssize_t len;
