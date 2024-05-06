@@ -454,7 +454,7 @@ static void HPAddDevice(struct udev_device *dev)
 
 	/* name from the Info.plist file */
 	// fullname = strdup(driver->readerName);
-	asprintf(&fullname, "%s", strdup(driver->readerName));
+	asprintf(&fullname, "%s (gen)", strdup(driver->readerName));
 
 	/* interface name from the device (if any) */
 	if (sInterfaceName)
