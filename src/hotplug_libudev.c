@@ -479,7 +479,7 @@ static void HPAddDevice(struct udev_device *dev)
 					Log4(PCSC_LOG_INFO, "Checking %s: %s == %s", dir->d_name, devpath, actualpath);
 					if(!strcmp(devpath, actualpath)){
 						Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", actualpath, dir->d_name);
-						asprintf(&fullname, "(SL:%s)", dir->d_name);
+						asprintf(&fullname, "%s (%s)", strdup(driver->readerName), dir->d_name);
 					}
 					free(actualpath);
 				}
