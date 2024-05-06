@@ -1444,8 +1444,9 @@ void RFWaitForReaderInit(void)
 			}
 		}
 
-		if (need_to_wait)
+		if (need_to_wait){
 			SYS_USleep(10*1000); /* 10 ms */
+		}
 	} while (need_to_wait);
 }
 #endif

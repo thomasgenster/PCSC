@@ -369,6 +369,7 @@ INTERNAL LONG MessageSend(void *buffer_void, uint64_t buffer_size,
 	/* repeat until all data is written */
 	while (remaining > 0)
 	{
+		Log2(PCSC_LOG_DEBUG, "MessageSend: %zu", remaining);
 		struct pollfd write_fd;
 		int pollret;
 
