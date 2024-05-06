@@ -468,11 +468,12 @@ static void HPAddDevice(struct udev_device *dev)
 	d = opendir("/dev");
 	char *actualpath;
 	if (d) {
-		Log1(PCSC_LOG_INFO, "Opening /dev");
 		while ((dir = readdir(d)) != NULL) {
 			if (dir && contains("simHub1Key", dir->d_name) > -1){
-				Log2(PCSC_LOG_INFO, "Reading directory: %s", dir->d_name);
-				actualpath = realpath(strcat("/dev/", dir->d_name), NULL);
+				char *sympath;
+				sympath = strcat("/dev/", dir->d_name);
+				Log2(PCSC_LOG_INFO, "Reading directory: %s", sympath);
+				actualpath = realpath(sympath, NULL);
 				if(actualpath != NULL){
 					Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", dir->d_name, actualpath);
 					free(actualpath);
