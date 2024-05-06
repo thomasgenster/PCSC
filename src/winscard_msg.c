@@ -440,6 +440,7 @@ INTERNAL LONG MessageSend(void *buffer_void, uint64_t buffer_size,
 		}
 	}
 
+	Log2(PCSC_LOG_DEBUG, "MessageSend retval: %d", retval);
 	return retval;
 }
 
