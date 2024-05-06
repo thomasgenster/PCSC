@@ -461,7 +461,7 @@ static void HPAddDevice(struct udev_device *dev)
 		sSerialNumber = udev_device_get_sysattr_value(parent, "serial");
 
 	/* name from the Info.plist file */
-	// fullname = strdup(driver->readerName);
+	fullname = strdup(driver->readerName);
 
 	char *actualpath;
 	DIR *d;
@@ -478,7 +478,7 @@ static void HPAddDevice(struct udev_device *dev)
 				if(actualpath != NULL){
 					if(devpath == actualpath){
 						Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", actualpath, dir->d_name);
-						asprintf(&fullname, "%s (%s)", strdup(driver->readerName), dir->d_name);
+						asprintf(&fullname, "%s (SL:%s)", strdup(driver->readerName), dir->d_name);
 					}
 					free(actualpath);
 				}
