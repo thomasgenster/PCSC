@@ -401,6 +401,7 @@ INTERNAL LONG MessageSend(void *buffer_void, uint64_t buffer_size,
 			written = write(filedes, buffer, remaining);
 #endif
 
+			Log2(PCSC_LOG_DEBUG, "MessageSend written: %d", written);
 			if (written > 0)
 			{
 				/* we wrote something */
