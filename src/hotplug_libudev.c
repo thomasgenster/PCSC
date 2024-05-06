@@ -475,8 +475,8 @@ static void HPAddDevice(struct udev_device *dev)
 				actualpath = realpath(strcat("/dev/", dir->d_name), NULL);
 				if(actualpath){
 					Log3(PCSC_LOG_INFO, "Found symlink: %s -> %s", dir->d_name, actualpath);
-					free(actualpath);
 				}
+				free(actualpath);
 				//printf("%s -> %s\n", dir->d_name, buf);
 			}
 		}
